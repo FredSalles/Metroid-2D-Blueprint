@@ -4,21 +4,21 @@ let map = {
     "height": 20,
     "orientation": "horizontal",
     "backdrop" : [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
+        [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+        [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0],
         [0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0],
-        [0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 3],
+        [3, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
+        [3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0]
         ],
     "data": [
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -52,12 +52,12 @@ let blockWitdh = 32;
 let blockHeight = 32;
 let cameraX = 0;
 let cameraY = 0;
-let step = 16;
+let step = 8;
 let ctx, img0, img1, img2, img3, images, offcanvas, offctx, backcanvas, backctx;
 let posX = 0;
 let posY = 0;
 
-function allMapOffCanvasRender(c,h,w,d,t) {
+function FREDRender(c,h,w,d,t) {
     for (let i = 0; i < h; i++) {
         for (let j = 0; j < w; j++) {
             if ((d[i][j] == 0) && t) {
@@ -74,40 +74,42 @@ function allMapOffCanvasRender(c,h,w,d,t) {
 window.onkeydown = function (event) {
     if (event.key === "ArrowRight") {
         if (posX <((map.width) * blockWitdh) - (canvasBlockWitdh * blockWitdh)) {
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.drawImage(backcanvas ,0 ,0);
-            ctx.translate(-step,0);
-        ctx.drawImage(offcanvas ,0 ,0);
-        posX += step;
-    }
+            update(-step,0);
+            return;
+        }
     }
     if (event.key === "ArrowLeft") {
         if (posX > 0) {
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.drawImage(backcanvas ,0 ,0);
-            ctx.translate(step,0);
-            ctx.drawImage(offcanvas ,0 ,0);
-            posX -= step;
+            update(step,0);
+            return;
         }
     }
     if (event.key === "ArrowUp") {
         if (posY > 0) {
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.drawImage(backcanvas ,0 ,0);
-            ctx.translate(0,step);
-        ctx.drawImage(offcanvas ,0 ,0);
-        posY -= step;
+            update(0,step);
+            return;
         }
     }
     if (event.key === "ArrowDown") {
         if ( posY <((map.height) * blockHeight) - (canvasBlockHeight * blockHeight)) {
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.drawImage(backcanvas ,0 ,0);
-            ctx.translate(0,-step);
-        ctx.drawImage(offcanvas ,0 ,0);
-        posY += step;
+            update(0,-step);
+            return;
+        }
     }
-    }
+}
+
+//
+// Update Canvas
+//
+function update(deltaX, deltaY) {
+    ctx.save();
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.drawImage(backcanvas ,0 ,0);
+    ctx.restore();
+    ctx.translate(deltaX,deltaY);
+    ctx.drawImage(offcanvas ,0 ,0);
+    posX -= deltaX;
+    posY -= deltaY;
 }
 
 //
@@ -129,9 +131,14 @@ window.onload = () => {
     backcanvas.height = canvasHeight;
     offctx = offcanvas.getContext("2d");
     backctx = backcanvas.getContext("2d");
-    allMapOffCanvasRender(offctx, map.height, map.width, map.data, true);
-    allMapOffCanvasRender(backctx, canvasBlockHeight, canvasBlockWitdh, map.backdrop, false);
-
+    //
+    // Render off-canvas background and foreground layers
+    //
+    FREDRender(offctx, map.height, map.width, map.data, true);
+    FREDRender(backctx, canvasBlockHeight, canvasBlockWitdh, map.backdrop, false);
+    //
+    // Renders initial Canvas View
+    //
     ctx.drawImage(backcanvas ,0 ,0);
     ctx.drawImage(offcanvas ,0 ,0);
 }
