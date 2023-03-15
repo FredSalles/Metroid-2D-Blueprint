@@ -1,10 +1,8 @@
 const map = {
     "name": "Brinstar",
-    "width": 32,
-    "height": 20,
-    "backWidth":15,
-    "backHeight":16,
-    "backdrop": [
+    "backWidth": 15,
+    "backHeight": 16,
+    "backdata": [
         [0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
         [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0],
@@ -21,6 +19,8 @@ const map = {
         [0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0]
     ],
+    "width": 32,
+    "height": 20,
     "data": [
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -72,12 +72,10 @@ let images;
 let camCanvas, frontCanvas, backCanvas;
 let camctx, frontctx, backctx;
 let keyboard;
+let zoomers;
+let zoomerImage;
 
 window.onload = () => {
-    //
-    // Register for next frame rendering callback
-    //
-    window.requestAnimationFrame(prepareNextFrame);
     //
     // Keyboard Listener
     //
@@ -86,13 +84,26 @@ window.onload = () => {
     //
     // Images
     //
-    let img0, img1, img2, img3, img4;
+    let img0, img1, img2, img3;
     img0 = document.getElementById("block_0");
     img1 = document.getElementById("block_1");
     img2 = document.getElementById("block_2");
     img3 = document.getElementById("block_3");
-    img4 = document.getElementById("zoomer");
+    zoomerImage = document.getElementById("zoomer");
     images = [img0, img1, img2, img3];
+    //
+    // Zoomer
+    //
+    let zoomer, zoomer1, zoomer2, zoomer3;
+    zoomer = new Zoomer();
+    zoomer.spawn(map.data, zoomer.CLOCK, zoomer.TOP, 9, 4);
+    zoomer1 = new Zoomer();
+    zoomer1.spawn(map.data, zoomer1.CLOCK, zoomer1.DOWN, 9, 12);
+    zoomer2 = new Zoomer();
+    zoomer2.spawn(map.data, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
+    zoomer3 = new Zoomer();
+    zoomer3.spawn(map.data, zoomer3.CLOCK, zoomer3.DOWN, 19, 17);
+    zoomers = [zoomer, zoomer1, zoomer2, zoomer3];
     //
     // Camera context
     //
@@ -100,6 +111,8 @@ window.onload = () => {
     camCanvas.width = cameraWitdh;
     camCanvas.height = cameraHeight;
     camctx = camCanvas.getContext("2d");
+    camctx.font = "20px Arial";
+    camctx.fillStyle = "white";
     //
     // Front layer context
     //
@@ -118,17 +131,20 @@ window.onload = () => {
     // Render layers off screen
     //
     renderLayer(frontctx, map.data, map.height, map.width, true);
-    renderLayer(backctx, map.backdrop, map.backHeight, map.backWidth, false);
+    renderLayer(backctx, map.backdata, map.backHeight, map.backWidth, false);
     //
     // Draw layers in main canvas
     //
     camctx.drawImage(backCanvas, 0, 0);
     camctx.drawImage(frontCanvas, 0, 0);
     //
+    // Register for next frame rendering callback
+    //
+    window.requestAnimationFrame(prepareNextFrame);
     //
     // Call interval for fps display
     //
-    setInterval(displayFrameRate, 5000);
+    //setInterval(displayFrameRate, 5000);
 }
 
 function displayFrameRate() {
@@ -160,6 +176,9 @@ function prepareNextFrame(elapsed) {
     // Update Camera Coordinates
     //
     moveCamera(delta);
+    for (const z of zoomers) {
+        z.move(0);
+    }
     //
     // Render layers
     //
@@ -171,14 +190,13 @@ function moveCamera(delta) {
     //
     // determine camera movement from arrow keys pressed
     //
-    let dirx = 0;
-    let diry = 0;
-    if (keyboard.isDown(keyboard.LEFT)) { dirx = -1; }
-    if (keyboard.isDown(keyboard.RIGHT)) { dirx = 1; }
-    if (keyboard.isDown(keyboard.UP)) { diry = -1; }
-    if (keyboard.isDown(keyboard.DOWN)) { diry = 1; }
-
-    if (dirx !== 0 || diry !== 0) {
+    let dirX = 0;
+    let dirY = 0;
+    if (keyboard.isDown(keyboard.LEFT)) { dirX = -1; }
+    if (keyboard.isDown(keyboard.RIGHT)) { dirX = 1; }
+    if (keyboard.isDown(keyboard.UP)) { dirY = -1; }
+    if (keyboard.isDown(keyboard.DOWN)) { dirY = 1; }
+    if (dirX !== 0 || dirY !== 0) {
         //
         // Move Camera
         //
@@ -196,18 +214,15 @@ function moveCamera(delta) {
         //   10    0.1 second    - 100 ms       51 pixels
         //    4    0.25 second   - 250 ms       128 pixels
         //
-        let _cameraX = cameraX;
-        let _cameraY = cameraY;
-        cameraX += dirx * cameraSpeed * delta;
-        cameraY += diry * cameraSpeed * delta;
-
+        cameraX += dirX * cameraSpeed * delta;
+        cameraY += dirY * cameraSpeed * delta;
         //
         // Bound camera coordinates
         //
-        let _maxValidCameraX = map.width * blockWitdh - cameraWitdh - blockWitdh;
-        let _maxValidCameraY = map.height * blockHeight - cameraHeight - blockHeight;
-        cameraX = Math.max(0, Math.min(cameraX, _maxValidCameraX));
-        cameraY = Math.max(0, Math.min(cameraY, _maxValidCameraY));
+        let maxValidCameraX = map.width * blockWitdh - cameraWitdh - blockWitdh;
+        let maxValidCameraY = map.height * blockHeight - cameraHeight - blockHeight;
+        cameraX = Math.max(0, Math.min(cameraX, maxValidCameraX));
+        cameraY = Math.max(0, Math.min(cameraY, maxValidCameraY));
         hasScrolled = true;
     }
 }
@@ -224,6 +239,16 @@ function renderGame() {
     //
     camctx.drawImage(backCanvas, 0, 0);
     camctx.drawImage(frontCanvas, 0, 0);
+    //
+    // use list - render only if on screen
+    //
+    for (const z of zoomers) {
+        camctx.drawImage(zoomerImage, z.x - cameraX, z.y - cameraY);
+    }
+    if (totalElapsed != 0) {
+        let frameRate = frameCounter / totalElapsed;
+        camctx.fillText(Math.round(frameRate) + " fps", 10, 20);
+    }
 }
 
 function renderLayer(context, mapData, width, height, transparency) {
@@ -234,8 +259,8 @@ function renderLayer(context, mapData, width, height, transparency) {
     let firstBlockY = Math.floor(cameraY / blockHeight);
     let drawPosOffsetX = cameraX % blockWitdh;
     let drawPosOffsetY = cameraY % blockHeight;
-    for (let i = firstBlockY; i < firstBlockY + cameraBlockHeight + 1; i++) {
-        for (let j = firstBlockX; j < firstBlockX + cameraBlockWitdh + 1; j++) {
+    for (let i = firstBlockY; i <= firstBlockY + cameraBlockHeight; i++) {
+        for (let j = firstBlockX; j <= firstBlockX + cameraBlockWitdh; j++) {
             if ((j < width) && (i < height)) {
                 let x = ((j - firstBlockX) * blockWitdh) - drawPosOffsetX;
                 let y = ((i - firstBlockY) * blockHeight) - drawPosOffsetY;
