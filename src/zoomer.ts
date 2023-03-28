@@ -26,16 +26,12 @@ class Zoomer {
 
     _canMoveStraightClock() {
         let x, y;
-        if ((this.anchor == this.LEFT)) {
+        if ((this.anchor == this.LEFT)|| (this.anchor == this.DOWN)) {
             x = Math.ceil(this.x / blockWitdh);
             y = Math.ceil(this.y / blockHeight);
         } else {
             x = Math.floor(this.x / blockWitdh);
             y = Math.floor(this.y / blockHeight);
-        }
-
-        if (this.anchor == this.DOWN) {
-            x += 1;;
         }
         if (this.anchor == this.TOP) {
             let empty = map.data[y][x + 1];
@@ -64,25 +60,20 @@ class Zoomer {
         let x = Math.round(this.x / blockWitdh);
         let y = Math.round(this.y / blockHeight);
 
-        if (this.anchor == this.DOWN) {
-            x += 1;;
-        }
-
         if (this.anchor == this.TOP) {
             let solid = map.data[y][x + 1];
             let empty = map.data[y + 1][x];
             if ((empty) == 0 && (solid != 0)) return true;
         }
         if (this.anchor == this.DOWN) {
-            let solid = map.data[y - 2][x - 2];
-            let empty = map.data[y - 2][x - 1];
+            let solid = map.data[y - 1][x - 1];
+            let empty = map.data[y - 1][x];
             if ((empty) == 0 && (solid != 0)) {
                 return true;
             }
         }
         if (this.anchor == this.RIGHT) {
             let solid = map.data[y + 1][x];
-            let solid1 = map.data[y + 1][x];
             let empty = map.data[y][x - 1];
             if ((empty) == 0 && (solid != 0)) return true;
         }
