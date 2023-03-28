@@ -6,7 +6,8 @@
     <title>Metroid</title>
     <link href="css/metroid.css" rel="stylesheet" type="text/css">
     <script src="keyboard.ts"></script>
-    <script src="Zoomer.ts"></script>
+    <script src="zoomer.ts"></script>
+    <script src="config.ts"></script>
     <script src="metroid.ts"></script>
 </head>
 
@@ -17,9 +18,11 @@
     <img id="block_3" src="img/block_3.jpg">
     <img id="zoomer" src="img/zoomer.jpg">
     <!--h3 id="framerate">calculating fps...</h3-->
-    <input type="checkbox" id="c1">Background</label>
-    <input type="checkbox" id="c2">Map</label>
-    <input type="checkbox" id="c2">Zoomer</label>
+    <input type="checkbox" id="c1" checked>Background</label>
+    <input type="checkbox" id="c2" checked>Map</label>
+    <input type="checkbox" id="c3" checked>Zoomers</label>
+    <input type="checkbox" id="c4">FPS</label>
+    <input type="checkbox" id="c5">Grid</label>
     <br><br>
     <canvas id="metroidCanvas"></canvas>
 </body>

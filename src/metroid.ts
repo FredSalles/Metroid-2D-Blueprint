@@ -26,14 +26,14 @@ const map = {
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
         [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2],
@@ -74,6 +74,7 @@ let camctx, frontctx, backctx;
 let keyboard;
 let zoomers;
 let zoomerImage;
+let config;
 
 window.onload = () => {
     //
@@ -84,26 +85,43 @@ window.onload = () => {
     //
     // Images
     //
-    let img0, img1, img2, img3;
-    img0 = document.getElementById("block_0");
-    img1 = document.getElementById("block_1");
-    img2 = document.getElementById("block_2");
-    img3 = document.getElementById("block_3");
+    let img0 = document.getElementById("block_0");
+    let img1 = document.getElementById("block_1");
+    let img2 = document.getElementById("block_2");
+    let img3 = document.getElementById("block_3");
     zoomerImage = document.getElementById("zoomer");
     images = [img0, img1, img2, img3];
     //
+    // Config
+    //
+    let c1 = document.getElementById("c1");
+    let c2 = document.getElementById("c2");
+    let c3 = document.getElementById("c3");
+    let c4 = document.getElementById("c4");
+    let c5 = document.getElementById("c5");
+    config = new Config();
+    config.add("background", c1);
+    config.add("map", c2);
+    config.add("zoomers", c3);
+    config.add("FPS", c4);
+    config.add("grid", c5);
+    //
     // Zoomer
     //
-    let zoomer, zoomer1, zoomer2, zoomer3;
+    let zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5;
     zoomer = new Zoomer();
-    zoomer.spawn(map.data, zoomer.CLOCK, zoomer.TOP, 9, 4);
+    zoomer.spawn(map.data, zoomer.COUNTERCLOCK, zoomer.TOP, 9, 4);
     zoomer1 = new Zoomer();
     zoomer1.spawn(map.data, zoomer1.CLOCK, zoomer1.DOWN, 9, 12);
     zoomer2 = new Zoomer();
     zoomer2.spawn(map.data, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
     zoomer3 = new Zoomer();
     zoomer3.spawn(map.data, zoomer3.CLOCK, zoomer3.DOWN, 19, 17);
-    zoomers = [zoomer, zoomer1, zoomer2, zoomer3];
+    zoomer4 = new Zoomer();
+    zoomer4.spawn(map.data, zoomer4.CLOCK, zoomer4.RIGHT, 29, 8);
+    zoomer5 = new Zoomer();
+    zoomer5.spawn(map.data, zoomer5.CLOCK, zoomer5.LEFT, 1, 8);
+    zoomers = [zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5];
     //
     // Camera context
     //
@@ -111,8 +129,8 @@ window.onload = () => {
     camCanvas.width = cameraWitdh;
     camCanvas.height = cameraHeight;
     camctx = camCanvas.getContext("2d");
-    camctx.font = "20px Arial";
     camctx.fillStyle = "white";
+    camctx.strokeStyle = "red";
     //
     // Front layer context
     //
@@ -173,7 +191,7 @@ function prepareNextFrame(elapsed) {
     totalElapsed += delta;
     frameCounter += 1;
     //
-    // Update Camera Coordinates
+    // Update Camera and zoomers Coordinates
     //
     moveCamera(delta);
     for (const z of zoomers) {
@@ -219,8 +237,8 @@ function moveCamera(delta) {
         //
         // Bound camera coordinates
         //
-        let maxValidCameraX = map.width * blockWitdh - cameraWitdh - blockWitdh;
-        let maxValidCameraY = map.height * blockHeight - cameraHeight - blockHeight;
+        let maxValidCameraX = map.width * blockWitdh - cameraWitdh ;
+        let maxValidCameraY = map.height * blockHeight - cameraHeight;
         cameraX = Math.max(0, Math.min(cameraX, maxValidCameraX));
         cameraY = Math.max(0, Math.min(cameraY, maxValidCameraY));
         hasScrolled = true;
@@ -229,25 +247,41 @@ function moveCamera(delta) {
 
 function renderGame() {
     //
-    // render map layear(s) if there has been scroll
+    // render map layer(s) if there has been scroll
     //
-    if (hasScrolled) {
+    if (hasScrolled || config.check("grid")) {
         renderLayer(frontctx, map.data, map.width, map.height, true);
     }
     //
-    // draw the map layer(s) into game context
+    // draw the map layer(s) into game canvas
     //
-    camctx.drawImage(backCanvas, 0, 0);
-    camctx.drawImage(frontCanvas, 0, 0);
-    //
-    // use list - render only if on screen
-    //
-    for (const z of zoomers) {
-        camctx.drawImage(zoomerImage, z.x - cameraX, z.y - cameraY);
+    if (config.check("background")) {
+        camctx.drawImage(backCanvas, 0, 0);
+    } else {
+        camctx.clearRect(0, 0, cameraWitdh, cameraHeight);
     }
-    if (totalElapsed != 0) {
-        let frameRate = frameCounter / totalElapsed;
-        camctx.fillText(Math.round(frameRate) + " fps", 10, 20);
+    if (config.check("map")) {
+        camctx.drawImage(frontCanvas, 0, 0);
+    }
+    //
+    // draw zoomer(s) sprites into game canvas
+    //
+    // [ToDo] Render only if on screen
+    //
+    if (config.check("zoomers")) {
+        for (const z of zoomers) {
+            camctx.drawImage(zoomerImage, z.x - cameraX, z.y - cameraY);
+        }
+    }
+    if (config.check("FPS")) {
+        //
+        // FPS
+        //
+        camctx.font = "20px Arial";
+        if (totalElapsed != 0) {
+            let frameRate = frameCounter / totalElapsed;
+            camctx.fillText(Math.round(frameRate) + " fps", 10, 20);
+        }
     }
 }
 
@@ -259,15 +293,21 @@ function renderLayer(context, mapData, width, height, transparency) {
     let firstBlockY = Math.floor(cameraY / blockHeight);
     let drawPosOffsetX = cameraX % blockWitdh;
     let drawPosOffsetY = cameraY % blockHeight;
+    context.fillStyle = "lightgray";
+    context.strokeStyle = "gray";
+    context.font = "10px Arial";
     for (let i = firstBlockY; i <= firstBlockY + cameraBlockHeight; i++) {
         for (let j = firstBlockX; j <= firstBlockX + cameraBlockWitdh; j++) {
             if ((j < width) && (i < height)) {
-                let x = ((j - firstBlockX) * blockWitdh) - drawPosOffsetX;
-                let y = ((i - firstBlockY) * blockHeight) - drawPosOffsetY;
-                if ((mapData[i][j] == 0) && transparency) {
-                    continue;
+                let x = Math.floor(((j - firstBlockX) * blockWitdh) - drawPosOffsetX);
+                let y = Math.floor(((i - firstBlockY) * blockHeight) - drawPosOffsetY);
+                if (!((mapData[i][j] == 0) && transparency)) {
+                    context.drawImage(images[mapData[i][j]], x, y);
                 }
-                context.drawImage(images[mapData[i][j]], x, y);
+                if (config.check("grid")) {
+                    context.strokeRect(x, y, blockWitdh, blockHeight);
+                    context.fillText(i + "," + j, x + 3, y + 10);
+                }
             }
         }
     }
