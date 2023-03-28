@@ -24,9 +24,12 @@ class Zoomer {
         this.y = y * 32;
     };
 
+    //
+    // Straight
+    //
     _canMoveStraightClock() {
         let x, y;
-        if ((this.anchor == this.LEFT)|| (this.anchor == this.DOWN)) {
+        if ((this.anchor == this.LEFT) || (this.anchor == this.DOWN)) {
             x = Math.ceil(this.x / blockWitdh);
             y = Math.ceil(this.y / blockHeight);
         } else {
@@ -36,82 +39,29 @@ class Zoomer {
         if (this.anchor == this.TOP) {
             let empty = map.data[y][x + 1];
             let solid = map.data[y - 1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y - 1][x];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.DOWN) {
             let empty = map.data[y][x - 1];
             let solid = map.data[y + 1][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y + 1][x];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.RIGHT) {
             let empty = map.data[y + 1][x];
             let solid = map.data[y + 1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y][x + 1];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.LEFT) {
             let empty = map.data[y - 1][x];
             let solid = map.data[y - 1][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y][x - 1];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         return false;
     };
-
-    _canTurnClock() {
-        let x = Math.round(this.x / blockWitdh);
-        let y = Math.round(this.y / blockHeight);
-
-        if (this.anchor == this.TOP) {
-            let solid = map.data[y][x + 1];
-            let empty = map.data[y + 1][x];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        if (this.anchor == this.DOWN) {
-            let solid = map.data[y - 1][x - 1];
-            let empty = map.data[y - 1][x];
-            if ((empty) == 0 && (solid != 0)) {
-                return true;
-            }
-        }
-        if (this.anchor == this.RIGHT) {
-            let solid = map.data[y + 1][x];
-            let empty = map.data[y][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        if (this.anchor == this.LEFT) {
-            let solid = map.data[y - 1][x + 1];
-            let empty = map.data[y][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        return false;
-    };
-
-    _canTurnCounter() {
-        let x = Math.floor(this.x / blockWitdh);
-        let y = Math.floor(this.y / blockHeight);
-
-        if (this.anchor == this.TOP) {
-            let empty = map.data[y+1][x];
-            let solid = map.data[y +1][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        if (this.anchor == this.DOWN) {
-            let empty = map.data[y-1][x];
-            let solid = map.data[y-1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        if (this.anchor == this.RIGHT) {
-            let empty = map.data[y][x-1];
-            let solid = map.data[y - 1][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        if (this.anchor == this.LEFT) {
-            let empty = map.data[y][x+1];
-            let solid = map.data[y + 1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
-        }
-        return false;
-    };
-
     _canMoveStraightCounter() {
         let x, y;
         if (((this.anchor == this.TOP) || (this.anchor == this.RIGHT))) {
@@ -125,27 +75,151 @@ class Zoomer {
         if (this.anchor == this.TOP) {
             let empty = map.data[y][x - 1];
             let solid = map.data[y - 1][x - 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y - 1][x];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.DOWN) {
             let empty = map.data[y][x + 1];
             let solid = map.data[y + 1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y + 1][x];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.RIGHT) {
             let empty = map.data[y - 1][x];
             let solid = map.data[y - 1][x + 1];
-            if ((empty) == 0 && (solid != 0)) return true;
+            let solid1 = map.data[y][x + 1];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
         }
         if (this.anchor == this.LEFT) {
             let empty = map.data[y + 1][x];
             let solid = map.data[y + 1][x - 1];
+            let solid1 = map.data[y][x - 1];
+            if ((empty) == 0 && ((solid != 0) || (solid1 != 0))) return true;
+        }
+        return false;
+    };
+
+    //
+    // Turn
+    //
+    _canTurnClock() {
+        let x = Math.round(this.x / blockWitdh);
+        let y = Math.round(this.y / blockHeight);
+
+        if (this.anchor == this.TOP) {
+            let solid = map.data[y][x + 1];
+            let empty = map.data[y + 1][x];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.DOWN) {
+            let solid = map.data[y][x - 1];
+            let empty = map.data[y - 1][x];
+            if ((empty) == 0 && (solid != 0)) {
+                return true;
+            }
+        }
+        if (this.anchor == this.RIGHT) {
+            let solid = map.data[y + 1][x];
+            let empty = map.data[y][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.LEFT) {
+            let solid = map.data[y - 1][x];
+            let empty = map.data[y][x + 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        return false;
+    };
+    _canTurnCounter() {
+        let x = Math.floor(this.x / blockWitdh);
+        let y = Math.floor(this.y / blockHeight);
+
+        if (this.anchor == this.TOP) {
+            let empty = map.data[y + 1][x];
+            let solid = map.data[y][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.DOWN) {
+            let empty = map.data[y - 1][x];
+            let solid = map.data[y - 1][x + 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.RIGHT) {
+            let empty = map.data[y][x - 1];
+            let solid = map.data[y - 1][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.LEFT) {
+            let empty = map.data[y][x + 1];
+            let solid = map.data[y + 1][x];
             if ((empty) == 0 && (solid != 0)) return true;
         }
         return false;
     };
 
+    //
+    // Climb
+    //
+    _canClimbClock() {
+        let x = Math.round(this.x / blockWitdh);
+        let y = Math.round(this.y / blockHeight);
+
+        if (this.anchor == this.TOP) {
+            let solid = map.data[y - 1][x - 1];
+            let empty = map.data[y - 1][x];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.DOWN) {
+            let solid = map.data[y + 1][x + 1];
+            let empty = map.data[y + 1][x];
+            if ((empty) == 0 && (solid != 0)) {
+                return true;
+            }
+        }
+        if (this.anchor == this.RIGHT) {
+            let solid = map.data[y - 1][x + 1];
+            let empty = map.data[y][x + 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.LEFT) {
+            let solid = map.data[y - 1][x - 1];
+            let empty = map.data[y][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        return false;
+    }
+    _canClimbCounter() {
+        let x = Math.floor(this.x / blockWitdh);
+        let y = Math.floor(this.y / blockHeight);
+
+        if (this.anchor == this.TOP) {
+            let empty = map.data[y - 1][x];
+            let solid = map.data[y - 1][x + 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.DOWN) {
+            let empty = map.data[y + 1][x];
+            let solid = map.data[y + 1][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.RIGHT) {
+            let empty = map.data[y][x + 1];
+            let solid = map.data[y + 1][x + 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        if (this.anchor == this.LEFT) {
+            let empty = map.data[y][x - 1];
+            let solid = map.data[y - 1][x - 1];
+            if ((empty) == 0 && (solid != 0)) return true;
+        }
+        return false;
+    }
+
+    //
+    // Reverse
+    //
     _reverseDirection() {
+        console.log("_reverseDirection called!");
         if (this.direction == this.CLOCK) {
             this.direction = this.COUNTERCLOCK;
         } else {
@@ -153,32 +227,35 @@ class Zoomer {
         }
     };
 
+    //
+    // Move
+    //
     move(delta) {
         if (this.direction == this.CLOCK) {
             switch (this.anchor) {
                 case (this.TOP):
-                    if (this._canMoveStraightClock()) this.x += 1; // right
-                    else if (this._canTurnClock()) this.anchor = this.RIGHT; // down
+                    if (this._canMoveStraightClock()) this.x += 1;
+                    else if (this._canTurnClock()) this.anchor = this.RIGHT;
+                    else if (this._canClimbClock()) this.anchor = this.LEFT;
                     else this._reverseDirection();
-                    //up
                     break;
                 case (this.RIGHT):
-                    if (this._canMoveStraightClock()) this.y += 1; // down
-                    else if (this._canTurnClock())this.anchor = this.DOWN; // left
+                    if (this._canMoveStraightClock()) this.y += 1;
+                    else if (this._canTurnClock()) this.anchor = this.DOWN;
+                    else if (this._canClimbClock()) this.anchor = this.TOP;
                     else this._reverseDirection();
-                    //right
                     break;
                 case (this.LEFT):
-                    if (this._canMoveStraightClock()) this.y -= 1; // up
-                    else if (this._canTurnClock())this.anchor = this.TOP; // right
+                    if (this._canMoveStraightClock()) this.y -= 1;
+                    else if (this._canTurnClock()) this.anchor = this.TOP;
+                    else if (this._canClimbClock()) this.anchor = this.DOWN;
                     else this._reverseDirection();
-                    //left
                     break;
                 case (this.DOWN):
-                    if (this._canMoveStraightClock()) this.x -= 1; // left
-                    else if (this._canTurnClock())this.anchor = this.LEFT; // up
+                    if (this._canMoveStraightClock()) this.x -= 1;
+                    else if (this._canTurnClock()) this.anchor = this.LEFT;
+                    else if (this._canClimbClock()) this.anchor = this.RIGHT;
                     else this._reverseDirection();
-                    //down
                     break;
                 default:
                     break;
@@ -186,28 +263,28 @@ class Zoomer {
         } else {
             switch (this.anchor) {
                 case (this.TOP):
-                    if (this._canMoveStraightCounter()) this.x -= 1; // left
-                    else if (this._canTurnCounter()) this.anchor = this.LEFT; // down
+                    if (this._canMoveStraightCounter()) this.x -= 1;
+                    else if (this._canTurnCounter()) this.anchor = this.LEFT;
+                    else if (this._canClimbCounter()) this.anchor = this.RIGHT;
                     else this._reverseDirection();
-                    //up
                     break;
                 case (this.RIGHT):
-                    if (this._canMoveStraightCounter()) this.y -= 1; // up
-                    else if (this._canTurnCounter()) this.anchor = this.TOP; // left
+                    if (this._canMoveStraightCounter()) this.y -= 1;
+                    else if (this._canTurnCounter()) this.anchor = this.TOP;
+                    else if (this._canClimbCounter()) this.anchor = this.DOWN;
                     else this._reverseDirection();
-                    //right
                     break;
                 case (this.LEFT):
-                    if (this._canMoveStraightCounter()) this.y += 1; // down
-                    else if (this._canTurnCounter()) this.anchor = this.DOWN; // right
+                    if (this._canMoveStraightCounter()) this.y += 1;
+                    else if (this._canTurnCounter()) this.anchor = this.DOWN;
+                    else if (this._canClimbCounter()) this.anchor = this.TOP;
                     else this._reverseDirection();
-                    //left
                     break;
                 case (this.DOWN):
-                    if (this._canMoveStraightCounter()) this.x += 1; // right
-                    else if (this._canTurnCounter()) this.anchor = this.RIGHT; // up
+                    if (this._canMoveStraightCounter()) this.x += 1;
+                    else if (this._canTurnCounter()) this.anchor = this.RIGHT;
+                    else if (this._canClimbCounter()) this.anchor = this.LEFT;
                     else this._reverseDirection();
-                    //down
                     break;
                 default:
                     break;
