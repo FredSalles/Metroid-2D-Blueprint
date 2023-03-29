@@ -110,17 +110,17 @@ window.onload = () => {
     //
     let zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5;
     zoomer = new Zoomer();
-    zoomer.spawn(map.data, zoomer.CLOCK, zoomer.TOP, 9, 4);
+    zoomer.spawn(map.data, zoomerImage, zoomer.CLOCK, zoomer.TOP, 9, 4);
     zoomer1 = new Zoomer();
-    zoomer1.spawn(map.data, zoomer1.COUNTERCLOCK, zoomer1.DOWN, 9, 12);
+    zoomer1.spawn(map.data, zoomerImage, zoomer1.COUNTERCLOCK, zoomer1.DOWN, 9, 12);
     zoomer2 = new Zoomer();
-    zoomer2.spawn(map.data, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
+    zoomer2.spawn(map.data, zoomerImage, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
     zoomer3 = new Zoomer();
-    zoomer3.spawn(map.data, zoomer3.COUNTERCLOCK, zoomer3.DOWN, 19, 17);
+    zoomer3.spawn(map.data, zoomerImage, zoomer3.COUNTERCLOCK, zoomer3.DOWN, 19, 17);
     zoomer4 = new Zoomer();
-    zoomer4.spawn(map.data, zoomer4.CLOCK, zoomer4.RIGHT, 29, 8);
+    zoomer4.spawn(map.data, zoomerImage, zoomer4.CLOCK, zoomer4.RIGHT, 29, 8);
     zoomer5 = new Zoomer();
-    zoomer5.spawn(map.data, zoomer5.COUNTERCLOCK, zoomer5.LEFT, 1, 8);
+    zoomer5.spawn(map.data, zoomerImage, zoomer5.COUNTERCLOCK, zoomer5.LEFT, 1, 8);
     zoomers = [zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5];
     //
     // Camera context
@@ -180,7 +180,7 @@ function prepareNextFrame(elapsed) {
     //
     // Register function again for next frame rendering callback
     //
-    
+
     window.requestAnimationFrame(prepareNextFrame);
     //
     // Compute delta time in seconds since last frame
@@ -238,7 +238,7 @@ function moveCamera(delta) {
         //
         // Bound camera coordinates
         //
-        let maxValidCameraX = map.width * blockWitdh - cameraWitdh ;
+        let maxValidCameraX = map.width * blockWitdh - cameraWitdh;
         let maxValidCameraY = map.height * blockHeight - cameraHeight;
         cameraX = Math.max(0, Math.min(cameraX, maxValidCameraX));
         cameraY = Math.max(0, Math.min(cameraY, maxValidCameraY));
@@ -271,7 +271,7 @@ function renderGame() {
     //
     if (config.check("zoomers")) {
         for (const z of zoomers) {
-            camctx.drawImage(zoomerImage, z.x - cameraX, z.y - cameraY);
+            z.render(camctx, cameraX, cameraY);
         }
     }
     if (config.check("FPS")) {
