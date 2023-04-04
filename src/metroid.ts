@@ -1,23 +1,23 @@
 const map = {
     "name": "Brinstar",
     "backWidth": 15,
-    "backHeight": 16,
+    "backHeight": 20,
     "backdata": [
-        [0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
-        [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0],
-        [3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3],
-        [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0],
-        [0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 3],
-        [3, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0],
-        [3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0]
+        [0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0],
+        [0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3],
+        [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3],
+        [3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0],
+        [0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 3],
+        [0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 3, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 3, 0, 3, 0, 0],
+        [3, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+        [3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0],
+        [0, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 0],
+        [0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0]
     ],
     "width": 32,
     "height": 20,
@@ -46,7 +46,7 @@ const map = {
 }
 
 // Camera Canvas Dimensions in blocks
-const cameraBlockWitdh = 16;
+const cameraBlockWitdh = 20;
 const cameraBlockHeight = 15;
 // Camera Block Dimensions in pixels
 const blockWitdh = 32;
@@ -69,12 +69,12 @@ let previousElapsed = 0;
 
 // Variables
 let images;
-let camCanvas, frontCanvas, backCanvas;
-let camctx, frontctx, backctx;
+let camCanvas, frontCanvas, backCanvas, contCanvas;
+let camctx, frontctx, backctx, contctx;
 let keyboard;
 let zoomers;
-let zoomerImage;
 let config;
+let loader;
 
 window.onload = () => {
     //
@@ -83,13 +83,20 @@ window.onload = () => {
     keyboard = new Keyboard();
     keyboard.listenForEvents([keyboard.LEFT, keyboard.RIGHT, keyboard.UP, keyboard.DOWN]);
     //
+    // Loader
+    //
+    loader = new Loader();
+    loader.loadImage("zoomer","./img/zoomer.jpg");
+    loader.loadImage("controller","./img/controller.jpg");
+    //
     // Images
+    // 
+    // [TODO] render blocks from sprite sheet
     //
     let img0 = document.getElementById("block_0");
     let img1 = document.getElementById("block_1");
     let img2 = document.getElementById("block_2");
     let img3 = document.getElementById("block_3");
-    zoomerImage = document.getElementById("zoomer");
     images = [img0, img1, img2, img3];
     //
     // Config
@@ -106,21 +113,23 @@ window.onload = () => {
     config.add("FPS", c4);
     config.add("grid", c5);
     //
-    // Zoomer
+    // Zoomers
+    //
+    // [TODO] spawn from config 
     //
     let zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5;
     zoomer = new Zoomer();
-    zoomer.spawn(map.data, zoomerImage, zoomer.CLOCK, zoomer.TOP, 9, 4);
+    zoomer.spawn(map.data, zoomer.CLOCK, zoomer.TOP, 9, 4);
     zoomer1 = new Zoomer();
-    zoomer1.spawn(map.data, zoomerImage, zoomer1.COUNTERCLOCK, zoomer1.DOWN, 9, 12);
+    zoomer1.spawn(map.data, zoomer1.COUNTERCLOCK, zoomer1.DOWN, 9, 12);
     zoomer2 = new Zoomer();
-    zoomer2.spawn(map.data, zoomerImage, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
+    zoomer2.spawn(map.data, zoomer2.CLOCK, zoomer2.TOP, 19, 4);
     zoomer3 = new Zoomer();
-    zoomer3.spawn(map.data, zoomerImage, zoomer3.COUNTERCLOCK, zoomer3.DOWN, 19, 17);
+    zoomer3.spawn(map.data, zoomer3.COUNTERCLOCK, zoomer3.DOWN, 19, 17);
     zoomer4 = new Zoomer();
-    zoomer4.spawn(map.data, zoomerImage, zoomer4.CLOCK, zoomer4.RIGHT, 29, 8);
+    zoomer4.spawn(map.data, zoomer4.CLOCK, zoomer4.RIGHT, 29, 8);
     zoomer5 = new Zoomer();
-    zoomer5.spawn(map.data, zoomerImage, zoomer5.COUNTERCLOCK, zoomer5.LEFT, 1, 8);
+    zoomer5.spawn(map.data, zoomer5.COUNTERCLOCK, zoomer5.LEFT, 1, 8);
     zoomers = [zoomer, zoomer1, zoomer2, zoomer3, zoomer4, zoomer5];
     //
     // Camera context
@@ -131,6 +140,13 @@ window.onload = () => {
     camctx = camCanvas.getContext("2d");
     camctx.fillStyle = "white";
     camctx.strokeStyle = "red";
+    //
+    // Controller context
+    //
+    contCanvas = document.getElementById("controllerCanvas");
+    contctx = contCanvas.getContext("2d");
+    contCanvas.width="200";
+    contCanvas.height="75";
     //
     // Front layer context
     //
@@ -159,28 +175,12 @@ window.onload = () => {
     // Register for next frame rendering callback
     //
     window.requestAnimationFrame(prepareNextFrame);
-    //
-    // Call interval for fps display
-    //
-    //setInterval(displayFrameRate, 5000);
-}
-
-function displayFrameRate() {
-    let element = document.getElementById("framerate");
-    if (element && (totalElapsed != 0)) {
-        let frameRate = frameCounter / totalElapsed;
-        element.innerHTML =
-            Math.round(frameRate) + " fps" +
-            " (" + Math.round(totalElapsed) + " seconds, " + frameCounter + " frames)";
-    }
-    setInterval(displayFrameRate, 5000);
 }
 
 function prepareNextFrame(elapsed) {
     //
     // Register function again for next frame rendering callback
     //
-
     window.requestAnimationFrame(prepareNextFrame);
     //
     // Compute delta time in seconds since last frame
@@ -248,6 +248,41 @@ function moveCamera(delta) {
 
 function renderGame() {
     //
+    // render controller canvas
+    //
+    let img = loader.getImage("controller");
+    if (img == null) {
+        console.log("game render: image not available yet..");
+    } else {
+        contctx.drawImage(img,0,0);
+        if (keyboard.isDown(keyboard.LEFT)) { 
+            contctx.beginPath();
+            contctx.arc(22, 42, 8, 0, 2 * Math.PI, false);
+            contctx.stroke();
+        }
+        if (keyboard.isDown(keyboard.RIGHT)) { 
+            contctx.beginPath();
+            contctx.arc(47, 42, 8, 0, 2 * Math.PI, false);
+            contctx.lineWidth = 5;
+            contctx.strokeStyle = '#FF0000';
+            contctx.stroke();
+        }
+        if (keyboard.isDown(keyboard.UP)) { 
+            contctx.beginPath();
+            contctx.arc(34, 29, 8, 0, 2 * Math.PI, false);
+            contctx.lineWidth = 5;
+            contctx.strokeStyle = '#FF0000';
+            contctx.stroke();
+        }
+        if (keyboard.isDown(keyboard.DOWN)) { 
+            contctx.beginPath();
+            contctx.arc(34, 55, 8, 0, 2 * Math.PI, false);
+            contctx.lineWidth = 5;
+            contctx.strokeStyle = '#FF0000';
+            contctx.stroke();
+        }
+    }
+    //
     // render map layer(s) if there has been scroll
     //
     if (hasScrolled || config.check("grid")) {
@@ -267,7 +302,7 @@ function renderGame() {
     //
     // draw zoomer(s) sprites into game canvas
     //
-    // [ToDo] Render only if on screen
+    // [TODO] Render only if on screen
     //
     if (config.check("zoomers")) {
         for (const z of zoomers) {

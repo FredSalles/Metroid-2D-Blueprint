@@ -15,35 +15,38 @@ class Zoomer {
     x = 0;
     y = 0;
     map;
-    img;
 
     render(ctx, cameraX, cameraY) {
+        let img = loader.getImage("zoomer");
+        if (img == null) {
+            console.log("zoomer render: image not available yet..");
+            return;
+        }
         if (this.anchor == this.TOP) {
-            ctx.translate(this.x - cameraX, this.y + this.img.height - cameraY);
+            ctx.translate(this.x - cameraX, this.y + img.height - cameraY);
             ctx.scale(1, -1);
-            ctx.drawImage(this.img, 0, 0);
+            ctx.drawImage(img, 0, 0);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         } else if (this.anchor == this.LEFT) {
-            ctx.translate(this.x - cameraX + this.img.width, this.y + this.img.height - cameraY);
+            ctx.translate(this.x - cameraX + img.width, this.y + img.height - cameraY);
             ctx.rotate(80);
             ctx.scale(1, -1);
-            ctx.drawImage(this.img, 0, 0);
+            ctx.drawImage(img, 0, 0);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         } else if (this.anchor == this.RIGHT) {
-            ctx.translate(this.x - cameraX, this.y + this.img.height - cameraY);
+            ctx.translate(this.x - cameraX, this.y + img.height - cameraY);
             ctx.rotate(80);
-            ctx.drawImage(this.img, 0, 0);
+            ctx.drawImage(img, 0, 0);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
         } else {
-            ctx.drawImage(this.img, this.x - cameraX, this.y - cameraY);
+            ctx.drawImage(img, this.x - cameraX, this.y - cameraY);
         }
     }
     //
     // Spawn
     //
-    spawn(map, img, direction, anchor, x, y) {
+    spawn(map, direction, anchor, x, y) {
         this.map = map;
-        this.img = img;
         this.direction = direction;
         this.anchor = anchor;
         this.x = x * 32;
@@ -140,9 +143,7 @@ class Zoomer {
         if (this.anchor == this.DOWN) {
             let solid = map.data[y][x - 1];
             let empty = map.data[y - 1][x];
-            if ((empty) == 0 && (solid != 0)) {
-                return true;
-            }
+            if ((empty) == 0 && (solid != 0)) return true;
         }
         if (this.anchor == this.RIGHT) {
             let solid = map.data[y + 1][x];
